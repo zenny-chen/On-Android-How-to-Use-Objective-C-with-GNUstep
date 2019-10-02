@@ -58,7 +58,7 @@ export ANDROID_TARGET_BINUTILS=${ANDROID_TARGET_BINUTILS:-x86_64-linux-android}
 export BUILD_TYPE=${BUILD_TYPE:-Release}
 ```
 
-最后，笔者将给出完整的运用于Android Studio项目工程中的CMakeLists.txt文件。这里假定当前C语言工程模块名为默认的native-lib，并且有一个名为“objc_test.m”的Objective-C源文件和一个“native-lib.c”的C源文件。
+因此，当前Objective-C与GNUstep库在Android平台上一般仅支持 **`armeabi-v7a`** ， **`arm64-v8a`** 以及 **`x86_64`** 这三种架构。当然，对于ARM系架构而言，后续还会支持ARMv9等更（gèng）新的架构。最后，笔者将给出完整的运用于Android Studio项目工程中的CMakeLists.txt文件。这里假定当前C语言工程模块名为默认的native-lib，并且有一个名为“objc_test.m”的Objective-C源文件和一个“native-lib.c”的C源文件。
 
 ```cmake
 # For more information about using CMake with Android Studio, read the
@@ -181,3 +181,4 @@ void ObjCTest(void)
 
 这里各位要注意，Android系统下由于有自己的日志打印系统，因此我们不能直接用`NSLog` 函数，而只能用Android自带的打印函数，直接用 `NSLog` 将会引发应用崩溃。
 
+最后，本仓库所附赠的demo是在基于Android Studio 3.5下搭建的，整个Native端的C语言采用了最新的 **`gnu17`** 语法扩展。因此推荐各位使用3.5或更新的版本尝试此demo。
