@@ -18,7 +18,7 @@ GNUstep官方GitHub提供了针对Android系统的脚本编译工具，链接为
 如果各位当前所用的NDK的clang版本在7.0以上，那么我们可以修改 **tools-android** 目录中的 `config/gnustep-make-user.config` 文件，将里面的 `RUNTIME_VERSION=gnustep-1.9` 修改为：`RUNTIME_VERSION=gnustep-2.0`。这样可让我们使用更先进的Objective-C的语法特性！如果修改了这里，那么我们在实际使用中也需要将编译选项 `-fobjc-runtime=gnustep-1.9` 修改为相应的 `-fobjc-runtime=gnustep-2.0`。    
 然而，这里有趣的是，笔者自己试了一下，如果我们使用gnustep-2.0，那么在ARMv8环境下会出现运行时加载错误，有一个启动selector的初始化函数会找不到，因此我们这里还是乖乖使用默认的 **`gnustep-1.9`** 就行～尽管在x86_64架构下没有问题……
 
-倘若我们不需要使用Grand Central Dispatch，也不想使用Blocks语法，并且也不想启用Objective-C自带的异常机制，那么以下提供了一个比较精简的 `--objc-flags` 编译选项：
+倘若我们不需要使用Grand Central Dispatch，也不想使用Blocks语法，并且也不想启用Objective-C自带的异常机制，那么以下提供了一个比较精简的 `--objc-flags` 编译选项，若想要自己裁剪编译选项，则可参考[此仓库](https://github.com/gnustep/tools-android)关于 `gnustep-config` 的部分。    
 ```bash
 -MP -DGNUSTEP -DGNUSTEP_BASE_LIBRARY=1 -DGNUSTEP_RUNTIME=1 -D_NONFRAGILE_ABI=1 -DGNUSTEP_BASE_LIBRARY=1 -fno-strict-aliasing -pthread -fPIC -Wall -DGSWARN -DGSDIAGNOSE -Wno-import -fobjc-runtime=gnustep-1.9 -fconstant-string-class=NSConstantString
 ```
